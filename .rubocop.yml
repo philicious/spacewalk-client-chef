@@ -1,0 +1,12 @@
+AllCops:
+  Exclude:
+    - 'files/**/*'
+    - 'Guardfile'
+
+LineLength:
+  Max: 330
+
+# we like our neatly-aligned code too much
+#
+SingleSpaceBeforeFirstArg:
+  Enabled: false

@@ -1,0 +1,22 @@
+---
+driver:
+  name: docker
+  socket: <%= ENV['DOCKER_HOST'] %>
+  use_sudo: false
+  disable_upstart: false
+  # start upstart
+  run_command: /sbin/init
+  # privileged required, as zookeper upstart jobs tunes limits (nofile)
+  privileged: true
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: ubuntu-12.04
+
+suites:
+  - name: default
+    run_list:
+      - recipe[spacewalk-client::ubuntu]
+    attributes: {}
