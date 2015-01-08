@@ -19,4 +19,8 @@ suites:
   - name: default
     run_list:
       - recipe[spacewalk-client::ubuntu]
-    attributes: {}
+    attributes:
+      spacewalk:
+        reg:
+          key: "1-ubuntu12.04-key"
+          server: "http://spacewalk.hc.lan"

@@ -1,7 +1,7 @@
 name             'spacewalk-client'
-maintainer       'YOUR_COMPANY_NAME'
-maintainer_email 'YOUR_EMAIL'
-license          'All rights reserved'
-description      'Installs/Configures spacewalk-client'
+maintainer 'Phil Schuler'
+maintainer_email 'the.cypher@gmail.com'
+license          'GNU GPL v2'
+description      'Installs/Configures a Spacewalk client'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '0.1.0'
