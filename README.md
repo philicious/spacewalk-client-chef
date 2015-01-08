@@ -18,7 +18,14 @@ Usage
 -----
 #### spacewalk-client::ubuntu
 
-Just include `spacewalk-client::ubuntu` in your node's `run_list` and set the default['spacewalk']['reg'] attributes.
+Include `spacewalk-client::ubuntu` in your node's `run_list` and set the default['spacewalk']['reg'] attributes.
+
+Also make sure you somehow (cookbook\_file, remote\_file..) put the following files in default['spacewalk']['pkg\_source\_path']
+- apt-transport-spacewalk-1.0.6-2.all-deb.deb
+- python-ethtool-0.11-2.amd64-deb.deb
+- python-rhn-2.5.55-2.all-deb.deb
+- rhn-client-tools-1.8.26-3.amd64-deb.deb
+- rhnsd-5.0.4-3.amd64-deb.deb
 
 License and Authors
 -------------------
