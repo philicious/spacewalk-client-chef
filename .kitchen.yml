@@ -14,13 +14,29 @@ provisioner:
 
 platforms:
   - name: ubuntu-12.04
-
+  - name: centos-6.6
+    driver_config:
+      image: centos:6.6
+      platform: centos
+  
 suites:
-  - name: default
+  - name: ubuntu
+    excludes:
+      - centos-6.6
     run_list:
       - recipe[spacewalk-client::ubuntu]
     attributes:
       spacewalk:
         reg:
           key: "1-ubuntu12.04-key"
+          server: "http://spacewalk.hc.lan"
+  - name: centos
+    excludes:
+      - ubuntu-12.04
+    run_list:
+      - recipe[spacewalk-client::rhel]  
+    attributes:
+      spacewalk:
+        reg:
+          key: "1-centos6"
           server: "http://spacewalk.hc.lan"

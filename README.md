@@ -16,6 +16,9 @@ default['spacewalk']['reg']['server'] = "my_spacewalk_server"
 
 Usage
 -----
+#### spacewalk-client::rhel
+Include `spacewalk-client::rhel` in your node's `run_list` and set the default['spacewalk']['reg'] attributes.
+
 #### spacewalk-client::ubuntu
 
 Include `spacewalk-client::ubuntu` in your node's `run_list` and set the default['spacewalk']['reg'] attributes.
