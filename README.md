@@ -34,5 +34,3 @@ Also make sure you somehow (cookbook\_file, remote\_file..) put the following fi
 License and Authors
 -------------------
 Authors: Phil Schuler http://devops-blog.net
-
-TODO: write spacewalk-client::rhel
