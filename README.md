@@ -4,7 +4,8 @@ This cookbook installs and registers a node as a Spacewalk client.
 
 Requirements
 ------------
-Ubuntu 12.04, 14.04
+- Ubuntu 12.04, 14.04
+- CentOS/RHEL 5,6,7
 
 Attributes
 ----------
