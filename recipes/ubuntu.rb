@@ -15,7 +15,7 @@ if node['platform_version'] == '12.04'
   end
 else
   apt_package 'apt-transport-spacewalk'
-  apt_package 'rhnsd'  
+  apt_package 'rhnsd'
 end
 
 apt_package 'python-libxml2'
