@@ -35,7 +35,7 @@ cookbook_file '/usr/lib/python2.7/xmlrpclib.py' do
 end
 
 cookbook_file '/apt/apt.conf.d/40fix_spacewalk_pdiff' do
-  source 'source'
+  source '40fix_spacewalk_pdiff'
   owner 'root'
   group 'root'
   mode '0644'
