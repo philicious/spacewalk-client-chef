@@ -3,6 +3,10 @@ spacewalk-client CHANGELOG
 
 This file is used to list changes made in each version of the spacewalk-client cookbook.
 
+0.1.3
+-----
+- Missing file for 0.1.1. 
+
 0.1.1
 -----
 - Fixed the 'repodata() takes exactly 2 arguments' exception with Ubuntu clients
