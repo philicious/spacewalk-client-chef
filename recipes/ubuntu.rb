@@ -34,6 +34,13 @@ cookbook_file '/usr/lib/python2.7/xmlrpclib.py' do
   mode '0644'
 end
 
+cookbook_file '/apt/apt.conf.d/40fix_spacewalk_pdiff' do
+  source 'source'
+  owner 'root'
+  group 'root'
+  mode '0644'
+end
+
 execute 'register-with-spacewalk-server' do
   command "rhnreg_ks --activationkey=#{node['spacewalk']['reg']['key']} --serverUrl=#{node['spacewalk']['reg']['server']}/XMLRPC"
   not_if { (File.exist?('/etc/sysconfig/rhn/systemid')) }
