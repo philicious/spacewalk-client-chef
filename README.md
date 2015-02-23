@@ -28,7 +28,7 @@ For 12.04 only, make sure you somehow (cookbook\_file, remote\_file..) put the f
 - apt-transport-spacewalk-1.0.6-2.all-deb.deb
 - python-ethtool-0.11-2.amd64-deb.deb
 - python-rhn-2.5.55-2.all-deb.deb
-- rhn-client-tools-1.8.26-3.amd64-deb.deb
+- rhn-client-tools-1.8.26-4.amd64-deb.deb
 - rhnsd-5.0.4-3.amd64-deb.deb
 
 You can build them yourself like described here
