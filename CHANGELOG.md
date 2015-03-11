@@ -3,6 +3,10 @@ spacewalk-client CHANGELOG
 
 This file is used to list changes made in each version of the spacewalk-client cookbook.
 
+0.1.6
+-----
+- Restart osad after registering with Spacewalk
+
 0.1.5
 -----
 - Install OSAD on clients if default['spacewalk']['enable_osad'] = true . Supports RHEL and Ubuntu

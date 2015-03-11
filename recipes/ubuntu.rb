@@ -69,4 +69,5 @@ end
 execute 'register-with-spacewalk-server' do
   command "rhnreg_ks --activationkey=#{node['spacewalk']['reg']['key']} --serverUrl=#{node['spacewalk']['reg']['server']}/XMLRPC"
   not_if { (File.exist?('/etc/sysconfig/rhn/systemid')) }
+  notifies :restart, 'service[osad]'  
 end
