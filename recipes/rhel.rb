@@ -19,6 +19,26 @@ include_recipe 'yum-epel'
   end
 end
 
+if node['spacewalk']['enable_osad']
+  %w(rhncfg-actions osad).each do |pkg|
+    package pkg do
+      action :install
+    end
+  end
+
+  remote_file '/usr/share/rhn/RHN-ORG-TRUSTED-SSL-CERT' do
+    owner 'root'
+    group 'root'
+    mode '0644'
+    source "#{node['spacewalk']['reg']['server']}/pub/RHN-ORG-TRUSTED-SSL-CERT"
+  end
+
+  service 'osad' do
+    supports status: true, restart: true, reload: true, start: true, stop: true
+    action [:start, :enable]
+  end
+end
+
 execute 'register-with-spacewalk-server' do
   command "rhnreg_ks --activationkey=#{node['spacewalk']['reg']['key']} --serverUrl=#{node['spacewalk']['reg']['server']}/XMLRPC"
   not_if { (File.exist?('/etc/sysconfig/rhn/systemid')) }

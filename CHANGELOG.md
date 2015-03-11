@@ -3,10 +3,16 @@ spacewalk-client CHANGELOG
 
 This file is used to list changes made in each version of the spacewalk-client cookbook.
 
+0.1.5
+-----
+- Install OSAD on clients if default['spacewalk']['enable_osad'] = true . Supports RHEL and Ubuntu
+- Changed the .deb package filenames and removed obsolete '-deb'
+
 0.1.4
 -----
 - Bumped rhn-client-tools package to new version fixing the xmlrpclib.py workaround
 - removed obsolete file xmlrpclib.py
+- Allow to choose url to download spacewalk package (PR by https://github.com/obazoud thx!)
 
 0.1.3
 -----

@@ -1,12 +1,23 @@
 if node['platform_version'] == '12.04'
-  %w(apt-transport-spacewalk-1.0.6-2.all-deb.deb
-     python-ethtool-0.11-2.amd64-deb.deb
-     python-rhn-2.5.55-2.all-deb.deb
-     rhn-client-tools-1.8.26-4.amd64-deb.deb
-     rhnsd-5.0.4-3.amd64-deb.deb).each do |pkg|
+  %w(apt-transport-spacewalk-1.0.6-2.all.deb
+     python-ethtool-0.11-2.amd64.deb
+     python-rhn-2.5.55-2.all.deb
+     rhn-client-tools-1.8.26-4.amd64.deb
+     rhnsd-5.0.4-3.amd64.deb).each do |pkg|
     dpkg_package pkg do
       source "#{node['spacewalk']['pkg_source_path']}/#{pkg}"
       ignore_failure true
+    end
+  end
+
+  if node['spacewalk']['enable_osad']
+    %w(rhncfg_5.10.14-1ubuntu1.all.deb
+       pyjabber_0.5.0-1.4ubuntu3.all.deb
+       osad_5.11.27-1ubuntu1.all.deb).each do |pkg|
+      dpkg_package pkg do
+        source "#{node['spacewalk']['pkg_source_path']}/#{pkg}"
+        ignore_failure true
+      end
     end
   end
 
@@ -32,6 +43,27 @@ cookbook_file '/etc/apt/apt.conf.d/40fix_spacewalk_pdiff' do
   owner 'root'
   group 'root'
   mode '0644'
+end
+
+if node['spacewalk']['enable_osad']
+  directory '/usr/share/rhn' do
+    owner 'root'
+    group 'root'
+    mode '0755'
+    action :create
+  end
+
+  remote_file '/usr/share/rhn/RHN-ORG-TRUSTED-SSL-CERT' do
+    owner 'root'
+    group 'root'
+    mode '0644'
+    source "#{node['spacewalk']['reg']['server']}/pub/RHN-ORG-TRUSTED-SSL-CERT"
+  end
+
+  service 'osad' do
+    supports status: true, restart: true, reload: true, start: true, stop: true
+    action [:start, :enable]
+  end
 end
 
 execute 'register-with-spacewalk-server' do

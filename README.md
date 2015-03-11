@@ -11,8 +11,10 @@ Attributes
 ----------
 ```
 default['spacewalk']['pkg_source_path'] = Chef::Config[:file_cache_path]
-default['spacewalk']['reg']['key'] = "my_activation_key"
-default['spacewalk']['reg']['server'] = "my_spacewalk_server"
+default['spacewalk']['rhel']['base_url'] = 'http://yum.spacewalkproject.org/2.2-client/RHEL'
+default['spacewalk']['reg']['key'] = 'my_activation_key'
+default['spacewalk']['reg']['server'] = 'http://spacewalk.example.com'
+default['spacewalk']['enable_osad'] = false
 ```
 
 Usage
@@ -30,9 +32,15 @@ For 12.04 only, make sure you somehow (cookbook\_file, remote\_file..) put the f
 - python-rhn-2.5.55-2.all-deb.deb
 - rhn-client-tools-1.8.26-4.amd64-deb.deb
 - rhnsd-5.0.4-3.amd64-deb.deb
+(if you want OSAD)
+- rhncfg_5.10.14-1ubuntu1.all.deb
+- pyjabber_0.5.0-1.4ubuntu3.all.deb
+- osad_5.11.27-1ubuntu1.all.deb
 
 You can build them yourself like described here
 http://www.devops-blog.net/spacewalk/registering-ubuntu-and-debian-servers-with-spacewalk
+and the OSAD packages from here
+https://launchpad.net/~mj-casalogic/+archive/ubuntu/spacewalk-ubuntu/+packages
 
 License and Authors
 -------------------
