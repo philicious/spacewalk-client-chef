@@ -32,6 +32,7 @@ For 12.04 only, make sure you somehow (cookbook\_file, remote\_file..) put the f
 - python-rhn-2.5.55-2.all.deb
 - rhn-client-tools-1.8.26-4.amd64.deb
 - rhnsd-5.0.4-3.amd64.deb
+
 (if you want OSAD)
 - rhncfg_5.10.14-1ubuntu1.all.deb
 - pyjabber_0.5.0-1.4ubuntu3.all.deb
