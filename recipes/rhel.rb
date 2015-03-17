@@ -33,14 +33,19 @@ if node['spacewalk']['enable_osad']
     source "#{node['spacewalk']['reg']['server']}/pub/RHN-ORG-TRUSTED-SSL-CERT"
   end
 
+  execute 'register-with-spacewalk-server' do
+    command "rhnreg_ks --activationkey=#{node['spacewalk']['reg']['key']} --serverUrl=#{node['spacewalk']['reg']['server']}/XMLRPC"
+    not_if { (File.exist?('/etc/sysconfig/rhn/systemid')) }
+    notifies :restart, 'service[osad]'
+  end
+
   service 'osad' do
     supports status: true, restart: true, reload: true, start: true, stop: true
     action [:start, :enable]
   end
-end
-
-execute 'register-with-spacewalk-server' do
-  command "rhnreg_ks --activationkey=#{node['spacewalk']['reg']['key']} --serverUrl=#{node['spacewalk']['reg']['server']}/XMLRPC"
-  not_if { (File.exist?('/etc/sysconfig/rhn/systemid')) }
-  notifies :restart, 'service[osad]'
+else
+  execute 'register-with-spacewalk-server' do
+    command "rhnreg_ks --activationkey=#{node['spacewalk']['reg']['key']} --serverUrl=#{node['spacewalk']['reg']['server']}/XMLRPC"
+    not_if { (File.exist?('/etc/sysconfig/rhn/systemid')) }
+  end
 end
