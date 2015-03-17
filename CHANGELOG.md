@@ -3,6 +3,11 @@ spacewalk-client CHANGELOG
 
 This file is used to list changes made in each version of the spacewalk-client cookbook.
 
+0.1.7
+-----
+- Fixed bug with OSAD being disabled but recipe tried to notify it (PR by https://github.com/obazoud thx!)
+- Fixed bug with spacewalk repo rpm not being installed
+
 0.1.6
 -----
 - Restart osad after registering with Spacewalk
