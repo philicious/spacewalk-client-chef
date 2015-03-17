@@ -6,7 +6,7 @@ remote_file "#{Chef::Config[:file_cache_path]}/spacewalk-client-repo.rpm" do
   action :create
 end
 
-package 'spacewalk-client-repo' do
+rpm_package 'spacewalk-client-repo' do
   source "#{Chef::Config[:file_cache_path]}/spacewalk-client-repo.rpm"
   action :install
 end
