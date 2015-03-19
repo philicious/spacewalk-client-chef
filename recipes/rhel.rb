@@ -39,6 +39,14 @@ if node['spacewalk']['enable_osad']
     notifies :restart, 'service[osad]'
   end
 
+  template '/etc/sysconfig/rhn/osad.conf' do
+    source 'osad.conf.erb'
+    owner 'root'
+    group 'root'
+    mode '0644'
+    notifies :restart, 'service[osad]'
+  end 
+
   service 'osad' do
     supports status: true, restart: true, reload: true, start: true, stop: true
     action [:start, :enable]
