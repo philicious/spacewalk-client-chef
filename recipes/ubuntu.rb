@@ -1,32 +1,27 @@
-if node['platform_version'] == '12.04'
-  %w(apt-transport-spacewalk-1.0.6-2.all.deb
-     python-ethtool-0.11-2.amd64.deb
-     python-rhn-2.5.55-2.all.deb
-     rhn-client-tools-1.8.26-4.amd64.deb
-     rhnsd-5.0.4-3.amd64.deb).each do |pkg|
+%w(apt-transport-spacewalk-1.0.6-2.all.deb
+   python-ethtool-0.11-2.amd64.deb
+   python-rhn-2.5.55-2.all.deb
+   rhn-client-tools-1.8.26-4.amd64.deb
+   rhnsd-5.0.4-3.amd64.deb).each do |pkg|
+  dpkg_package pkg do
+    source "#{node['spacewalk']['pkg_source_path']}/#{pkg}"
+    ignore_failure true
+  end
+end
+
+if node['spacewalk']['enable_osad']
+  %w(rhncfg_5.10.14-1ubuntu1.all.deb
+     pyjabber_0.5.0-1.4ubuntu3.all.deb
+     osad_5.11.27-1ubuntu1.all.deb).each do |pkg|
     dpkg_package pkg do
       source "#{node['spacewalk']['pkg_source_path']}/#{pkg}"
       ignore_failure true
     end
   end
+end
 
-  if node['spacewalk']['enable_osad']
-    %w(rhncfg_5.10.14-1ubuntu1.all.deb
-       pyjabber_0.5.0-1.4ubuntu3.all.deb
-       osad_5.11.27-1ubuntu1.all.deb).each do |pkg|
-      dpkg_package pkg do
-        source "#{node['spacewalk']['pkg_source_path']}/#{pkg}"
-        ignore_failure true
-      end
-    end
-  end
-
-  execute 'install-spacewalk-deps' do
-    command 'apt-get -yf install'
-  end
-else
-  apt_package 'apt-transport-spacewalk'
-  apt_package 'rhnsd'
+execute 'install-spacewalk-deps' do
+  command 'apt-get -yf install'
 end
 
 apt_package 'python-libxml2'

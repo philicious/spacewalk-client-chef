@@ -3,6 +3,10 @@ spacewalk-client CHANGELOG
 
 This file is used to list changes made in each version of the spacewalk-client cookbook.
 
+0.1.8
+-----
+- Added proper support for Ubuntu 14. The available packages from trusty repo are outdated and broken.
+
 0.1.7
 -----
 - Fixed bug with OSAD being disabled but recipe tried to notify it (PR by https://github.com/obazoud thx!)

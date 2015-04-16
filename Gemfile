@@ -21,8 +21,8 @@ group :kitchen_vagrant do
   gem 'kitchen-vagrant'
 end
 
-group :kitchen_docker_api do
-  gem 'kitchen-docker-api'
+group :kitchen_docker do
+  gem 'kitchen-docker'
 end
 
 group :development do
