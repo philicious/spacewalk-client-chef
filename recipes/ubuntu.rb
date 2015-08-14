@@ -1,11 +1,15 @@
-%w(apt-transport-spacewalk-1.0.6-2.all.deb
+package 'install-spacewalk-deps' do
+  package_name %w(python-openssl libnl-3-200 libnl-route-3-200 python-dbus
+                  python-apt python-newt python-gudev python-dmidecode python-libxml2)
+end
+
+%w(python-rhn-2.5.55-2.all.deb
    python-ethtool-0.11-2.amd64.deb
-   python-rhn-2.5.55-2.all.deb
    rhn-client-tools-1.8.26-4.amd64.deb
+   apt-transport-spacewalk-1.0.6-2.all.deb
    rhnsd-5.0.4-3.amd64.deb).each do |pkg|
   dpkg_package pkg do
     source "#{node['spacewalk']['pkg_source_path']}/#{pkg}"
-    ignore_failure true
   end
 end
 
@@ -15,16 +19,9 @@ if node['spacewalk']['enable_osad']
      osad_5.11.27-1ubuntu1.all.deb).each do |pkg|
     dpkg_package pkg do
       source "#{node['spacewalk']['pkg_source_path']}/#{pkg}"
-      ignore_failure true
     end
   end
 end
-
-execute 'install-spacewalk-deps' do
-  command 'apt-get -yf install'
-end
-
-apt_package 'python-libxml2'
 
 directory '/var/lock/subsys' do
   owner 'root'

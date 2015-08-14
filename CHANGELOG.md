@@ -3,6 +3,11 @@ spacewalk-client CHANGELOG
 
 This file is used to list changes made in each version of the spacewalk-client cookbook.
 
+0.1.9
+-----
+- install the .debs and dependencies in correct order so we dont need "apt-get -f" afterwards and 
+  avoid errors that would need to be ignored
+
 0.1.8
 -----
 - Added proper support for Ubuntu 14. The available packages from trusty repo are outdated and broken.
