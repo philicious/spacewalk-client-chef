@@ -26,7 +26,7 @@ Include `spacewalk-client::rhel` in your node's `run_list` and set the default['
 
 Include `spacewalk-client::ubuntu` in your node's `run_list` and set the default['spacewalk']['reg'] attributes.
 
-For 12.04 only, make sure you somehow (cookbook\_file, remote\_file..) put the following files in default['spacewalk']['pkg\_source\_path']
+Make sure you somehow (cookbook\_file, remote\_file..) put the following files in default['spacewalk']['pkg\_source\_path']
 - apt-transport-spacewalk-1.0.6-2.all.deb
 - python-ethtool-0.11-2.amd64.deb
 - python-rhn-2.5.55-2.all.deb
