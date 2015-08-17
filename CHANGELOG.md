@@ -3,6 +3,11 @@ spacewalk-client CHANGELOG
 
 This file is used to list changes made in each version of the spacewalk-client cookbook.
 
+0.1.10
+-----
+- refactor to be compatible with Chef 11 again due to a bug in Chef, see
+  https://github.com/chef/chef/issues/3786 
+
 0.1.9
 -----
 - install the .debs and dependencies in correct order so we dont need "apt-get -f" afterwards and 

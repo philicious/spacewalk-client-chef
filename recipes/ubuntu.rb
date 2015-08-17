@@ -1,6 +1,7 @@
-package 'install-spacewalk-deps' do
-  package_name %w(python-openssl libnl-3-200 libnl-route-3-200 python-dbus
-                  python-apt python-newt python-gudev python-dmidecode python-libxml2)
+
+%w(python-openssl libnl-3-200 libnl-route-3-200 python-dbus
+   python-apt python-newt python-gudev python-dmidecode python-libxml2).each do |pkg|
+  package pkg
 end
 
 %w(python-rhn-2.5.55-2.all.deb
