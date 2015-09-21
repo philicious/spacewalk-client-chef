@@ -1,3 +1,4 @@
+include_recipe 'spacewalk-client::default'
 
 %w(python-openssl libnl-3-200 libnl-route-3-200 python-dbus
    python-apt python-newt python-gudev python-dmidecode python-libxml2).each do |pkg|

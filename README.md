@@ -15,6 +15,7 @@ default['spacewalk']['rhel']['base_url'] = 'http://yum.spacewalkproject.org/2.2-
 default['spacewalk']['reg']['key'] = 'my_activation_key'
 default['spacewalk']['reg']['server'] = 'http://spacewalk.example.com'
 default['spacewalk']['enable_osad'] = false
+default['spacewalk']['rhnactions']['run'] = false # systems also need provisioning entitlement
 ```
 
 Usage
