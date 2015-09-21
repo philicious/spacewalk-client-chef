@@ -1,9 +1,10 @@
-
+# base dependencies
 %w(python-openssl libnl-3-200 libnl-route-3-200 python-dbus
    python-apt python-newt python-gudev python-dmidecode python-libxml2).each do |pkg|
   package pkg
 end
 
+# base packages
 %w(python-rhn-2.5.55-2.all.deb
    python-ethtool-0.11-2.amd64.deb
    rhn-client-tools-1.8.26-4.amd64.deb
@@ -14,9 +15,35 @@ end
   end
 end
 
+# rhn config package
+if node['spacewalk']['enable_rhncfg']
+  dpkg_package 'rhncfg_5.10.14-1ubuntu1.all.deb' do
+    source "#{node['spacewalk']['pkg_source_path']}/#{name}"
+  end
+
+  if node['spacewalk']['rhncfg']['actions']['run']
+    # we need osad for run action to be executed instantly
+    node.default['spacewalk']['enable_osad'] = true
+
+    file '/etc/sysconfig/rhn/allowed-actions/script/run' do
+      action :create
+      owner 'root'
+      group 'root'
+      mode '0644'
+    end
+
+    directory '/var/spool/rhn/' do
+      owner 'root'
+      group 'root'
+      mode '0755'
+      action :create
+    end
+  end
+end
+
+# osad packages
 if node['spacewalk']['enable_osad']
-  %w(rhncfg_5.10.14-1ubuntu1.all.deb
-     pyjabber_0.5.0-1.4ubuntu3.all.deb
+  %w(pyjabber_0.5.0-1.4ubuntu3.all.deb
      osad_5.11.27-1ubuntu1.all.deb).each do |pkg|
     dpkg_package pkg do
       source "#{node['spacewalk']['pkg_source_path']}/#{pkg}"
@@ -38,6 +65,7 @@ cookbook_file '/etc/apt/apt.conf.d/40fix_spacewalk_pdiff' do
   mode '0644'
 end
 
+# register client with spacewalk
 if node['spacewalk']['enable_osad']
   directory '/usr/share/rhn' do
     owner 'root'

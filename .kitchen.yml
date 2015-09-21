@@ -15,7 +15,7 @@ platforms:
     driver_config:
       image: centos:6.6
       platform: centos
-  
+
 suites:
   - name: ubuntu12
     excludes:
@@ -28,7 +28,10 @@ suites:
         reg:
           key: "1-ubuntu12.04-key"
           server: "http://spacewalk.hc.lan"
-        enable_osad: true
+        enable_rhncfg: true
+        rhncfg:
+          actions:
+            run: true    
   - name: ubuntu14
     excludes:
       - centos-6.6
@@ -40,16 +43,22 @@ suites:
         reg:
           key: "1-ubuntu14.04-key"
           server: "http://spacewalk.hc.lan"
-        enable_osad: true        
+        enable_rhncfg: true
+        rhncfg:
+          actions:
+            run: true        
   - name: centos
     excludes:
       - ubuntu-12.04
       - ubuntu-14.04
     run_list:
-      - recipe[spacewalk-client::rhel]  
+      - recipe[spacewalk-client::rhel]
     attributes:
       spacewalk:
         reg:
           key: "1-centos6"
           server: "http://spacewalk.hc.lan"
-        enable_osad: true    
+        enable_rhncfg: true
+        rhncfg:
+          actions:
+            run: true     
