@@ -13,19 +13,40 @@ end
 
 include_recipe 'yum-epel'
 
+# base packages
 %w(rhn-client-tools rhn-check rhn-setup rhnsd m2crypto yum-rhn-plugin).each do |pkg|
   package pkg do
     action :install
   end
 end
 
-if node['spacewalk']['enable_osad']
-  %w(rhncfg-actions osad).each do |pkg|
-    package pkg do
-      action :install
-    end
+# rhn config package
+if node['spacewalk']['enable_rhncfg']
+  package 'rhncfg-actions' do
+    action :install
   end
 
+  if node['spacewalk']['rhncfg']['actions']['run']
+    # we need osad for run action to be executed instantly
+    node.default['spacewalk']['enable_osad'] = true
+
+    file '/etc/sysconfig/rhn/allowed-actions/script/run' do
+      action :create
+      owner 'root'
+      group 'root'
+      mode '0644'
+    end
+  end
+end
+
+# osad package 
+package 'osad' do
+  action :install
+  only_if {node['spacewalk']['enable_osad']}
+end
+
+# register client with spacewalk
+if node['spacewalk']['enable_osad']
   remote_file '/usr/share/rhn/RHN-ORG-TRUSTED-SSL-CERT' do
     owner 'root'
     group 'root'
