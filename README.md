@@ -15,7 +15,8 @@ default['spacewalk']['rhel']['base_url'] = 'http://yum.spacewalkproject.org/2.2-
 default['spacewalk']['reg']['key'] = 'my_activation_key'
 default['spacewalk']['reg']['server'] = 'http://spacewalk.example.com'
 default['spacewalk']['enable_osad'] = false
-default['spacewalk']['rhnactions']['run'] = false # systems also need provisioning entitlement
+default['spacewalk']['enable_rhncfg'] = false
+default['spacewalk']['rhncfg']['actions']['run'] = false # systems also need provisioning entitlement
 ```
 
 Usage
@@ -33,9 +34,9 @@ Make sure you somehow (cookbook\_file, remote\_file..) put the following files i
 - python-rhn-2.5.55-2.all.deb
 - rhn-client-tools-1.8.26-4.amd64.deb
 - rhnsd-5.0.4-3.amd64.deb
+- rhncfg_5.10.14-1ubuntu1.all.deb
 
 (if you want OSAD)
-- rhncfg_5.10.14-1ubuntu1.all.deb
 - pyjabber_0.5.0-1.4ubuntu3.all.deb
 - osad_5.11.27-1ubuntu1.all.deb
 
