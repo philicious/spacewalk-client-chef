@@ -3,6 +3,10 @@ spacewalk-client CHANGELOG
 
 This file is used to list changes made in each version of the spacewalk-client cookbook.
 
+0.1.12
+------
+- added client repo version as attribute for ::rhel
+
 0.1.11
 ------
 - added trigger to enable the ability to execute remote scripts

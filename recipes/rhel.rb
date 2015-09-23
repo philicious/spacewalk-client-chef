@@ -2,7 +2,7 @@ arch = node['kernel']['machine'] == 'x86_64' ? 'x86_64' : 'i386'
 platform_major = node['platform_version'][0]
 
 remote_file "#{Chef::Config[:file_cache_path]}/spacewalk-client-repo.rpm" do
-  source "#{node['spacewalk']['rhel']['base_url']}/#{platform_major}/#{arch}/spacewalk-client-repo-2.2-1.el#{platform_major}.noarch.rpm"
+  source "#{node['spacewalk']['rhel']['base_url']}/#{platform_major}/#{arch}/spacewalk-client-repo-#{node['spacewalk']['rhel']['repo_version']}.el#{platform_major}.noarch.rpm"
   action :create
 end
 
@@ -39,10 +39,10 @@ if node['spacewalk']['enable_rhncfg']
   end
 end
 
-# osad package 
+# osad package
 package 'osad' do
   action :install
-  only_if {node['spacewalk']['enable_osad']}
+  only_if { node['spacewalk']['enable_osad'] }
 end
 
 # register client with spacewalk

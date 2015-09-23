@@ -12,6 +12,7 @@ Attributes
 ```
 default['spacewalk']['pkg_source_path'] = Chef::Config[:file_cache_path]
 default['spacewalk']['rhel']['base_url'] = 'http://yum.spacewalkproject.org/2.2-client/RHEL'
+default['spacewalk']['rhel']['repo_version'] = '2.2-1'
 default['spacewalk']['reg']['key'] = 'my_activation_key'
 default['spacewalk']['reg']['server'] = 'http://spacewalk.example.com'
 default['spacewalk']['enable_osad'] = false
