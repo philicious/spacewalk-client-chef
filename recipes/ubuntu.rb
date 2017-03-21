@@ -5,11 +5,11 @@
 end
 
 # base packages
-%w(python-rhn-2.5.55-2.all.deb
-   python-ethtool-0.11-2.amd64.deb
-   rhn-client-tools-1.8.26-4.amd64.deb
-   apt-transport-spacewalk-1.0.6-2.all.deb
-   rhnsd-5.0.4-3.amd64.deb).each do |pkg|
+%w(python-rhn_2.5.72-1_all.deb
+   python-ethtool_0.11-3_amd64.deb
+   rhn-client-tools_1.8.26-4_amd64.deb
+   apt-transport-spacewalk_1.0.6-4.1_all.deb
+   rhnsd_5.0.4-3_amd64.deb).each do |pkg|
   dpkg_package pkg do
     source "#{node['spacewalk']['pkg_source_path']}/#{pkg}"
   end
@@ -17,7 +17,7 @@ end
 
 # rhn config package
 if node['spacewalk']['enable_rhncfg']
-  dpkg_package 'rhncfg_5.10.14-1ubuntu1.all.deb' do
+  dpkg_package 'rhncfg_5.10.14-1ubuntu1_all.deb' do
     source "#{node['spacewalk']['pkg_source_path']}/#{name}"
   end
 
@@ -43,8 +43,8 @@ end
 
 # osad packages
 if node['spacewalk']['enable_osad']
-  %w(pyjabber_0.5.0-1.4ubuntu3.all.deb
-     osad_5.11.27-1ubuntu1.all.deb).each do |pkg|
+  %w(pyjabber_0.5.0-1.4ubuntu3_all.deb
+     osad_5.11.27-1ubuntu1_all.deb).each do |pkg|
     dpkg_package pkg do
       source "#{node['spacewalk']['pkg_source_path']}/#{pkg}"
     end

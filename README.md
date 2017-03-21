@@ -4,7 +4,7 @@ This cookbook installs and registers a node as a Spacewalk client.
 
 Requirements
 ------------
-- Ubuntu 12.04, 14.04
+- Ubuntu 12.04, 14.04, 16.04
 - CentOS/RHEL 5,6,7
 
 Attributes
@@ -30,16 +30,18 @@ Include `spacewalk-client::rhel` in your node's `run_list` and set the default['
 Include `spacewalk-client::ubuntu` in your node's `run_list` and set the default['spacewalk']['reg'] attributes.
 
 Make sure you somehow (cookbook\_file, remote\_file..) put the following files in default['spacewalk']['pkg\_source\_path']
-- apt-transport-spacewalk-1.0.6-2.all.deb
-- python-ethtool-0.11-2.amd64.deb
-- python-rhn-2.5.55-2.all.deb
-- rhn-client-tools-1.8.26-4.amd64.deb
-- rhnsd-5.0.4-3.amd64.deb
-- rhncfg_5.10.14-1ubuntu1.all.deb
+- apt-transport-spacewalk_1.0.6-4.1_all.deb
+- python-ethtool_0.11-3_amd64.deb (dont use 0.12-1, causes segfault on xenial)
+- python-rhn_2.5.72-1_all.deb
+- rhn-client-tools_1.8.26-4_amd64.deb
+- rhnsd_5.0.4-3_amd64.deb
+- rhncfg_5.10.14-1ubuntu1_all.deb
 
 (if you want OSAD)
 - pyjabber_0.5.0-1.4ubuntu3.all.deb
 - osad_5.11.27-1ubuntu1.all.deb
+
+these versions are tested to work with Ubuntu trusty and xenial
 
 You can build them yourself like described here
 http://www.devops-blog.net/spacewalk/registering-ubuntu-and-debian-servers-with-spacewalk
