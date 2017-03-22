@@ -1,7 +1,6 @@
 ---
 driver:
   name: docker
-  socket: <%= ENV['DOCKER_HOST'] %>
   use_sudo: false
   privileged: true
 
@@ -11,54 +10,98 @@ provisioner:
 platforms:
   - name: ubuntu-12.04
   - name: ubuntu-14.04
-  - name: centos-6.6
+  - name: ubuntu-16.04
+  - name: centos-6
+  - name: centos-7
     driver_config:
-      image: centos:6.6
-      platform: centos
+      run_command: /usr/sbin/init
+      volume:
+        - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+      provision_command: systemctl enable sshd.service
 
 suites:
   - name: ubuntu12
     excludes:
-      - centos-6.6
+      - centos-6
+      - centos-7
       - ubuntu-14.04
+      - ubuntu-16.04
     run_list:
       - recipe[spacewalk-client::ubuntu]
     attributes:
       spacewalk:
         reg:
-          key: "1-ubuntu12.04-key"
-          server: "http://spacewalk.hc.lan"
+          key: "1-precise"
+          server: "http://spacewalk.lan"
         enable_rhncfg: true
         rhncfg:
           actions:
             run: true    
   - name: ubuntu14
     excludes:
-      - centos-6.6
+      - centos-6
+      - centos-7
       - ubuntu-12.04
+      - ubuntu-16.04
     run_list:
       - recipe[spacewalk-client::ubuntu]
     attributes:
       spacewalk:
         reg:
-          key: "1-ubuntu14.04-key"
-          server: "http://spacewalk.hc.lan"
+          key: "1-trusty"
+          server: "http://spacewalk.lan"
         enable_rhncfg: true
         rhncfg:
           actions:
-            run: true        
-  - name: centos
+            run: true
+  - name: ubuntu16
     excludes:
+      - centos-6
+      - centos-7
       - ubuntu-12.04
       - ubuntu-14.04
+    run_list:
+      - recipe[spacewalk-client::ubuntu]
+    attributes:
+      spacewalk:
+        reg:
+          key: "1-xenial"
+          server: "http://spacewalk.lan"
+        enable_rhncfg: true
+        rhncfg:
+          actions:
+            run: true                        
+  - name: centos7
+    excludes:
+      - centos-6
+      - ubuntu-12.04
+      - ubuntu-14.04
+      - ubuntu-16.04
+    run_list:
+      - recipe[spacewalk-client::rhel]
+    attributes:
+      spacewalk:
+        reg:
+          key: "1-centos7"
+          server: "http://spacewalk.lan"
+        enable_rhncfg: true
+        rhncfg:
+          actions:
+            run: true
+  - name: centos6
+    excludes:
+      - centos-7
+      - ubuntu-12.04
+      - ubuntu-14.04
+      - ubuntu-16.04
     run_list:
       - recipe[spacewalk-client::rhel]
     attributes:
       spacewalk:
         reg:
           key: "1-centos6"
-          server: "http://spacewalk.hc.lan"
+          server: "http://spacewalk.lan"
         enable_rhncfg: true
         rhncfg:
           actions:
-            run: true     
+            run: true                    
