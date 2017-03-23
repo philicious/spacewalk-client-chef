@@ -3,6 +3,11 @@ spacewalk-client CHANGELOG
 
 This file is used to list changes made in each version of the spacewalk-client cookbook.
 
+0.2.0
+-----
+- updated the Ubuntu client package versions
+- updated RHEL client repo version to 2.6-0, still was 2.2-1
+
 0.1.12
 ------
 - added client repo version as attribute for ::rhel
