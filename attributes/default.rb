@@ -6,3 +6,6 @@ default['spacewalk']['enable_rhncfg'] = false
 default['spacewalk']['reg']['key'] = 'my-reg-key'
 default['spacewalk']['reg']['server'] = 'http://spacewalk.example.com'
 default['spacewalk']['rhncfg']['actions']['run'] = false
+default['spacewalk']['reg']['save'] = false
+default['spacewalk']['reg']['key_dir'] = '/root/.spacewalk'
+default['spacewalk']['dont_add_repo_files'] = false

@@ -6,6 +6,7 @@ driver:
 
 provisioner:
   name: chef_zero
+  log_level: info
 
 platforms:
   - name: ubuntu-12.04
@@ -36,7 +37,7 @@ suites:
         enable_rhncfg: true
         rhncfg:
           actions:
-            run: true    
+            run: true
   - name: ubuntu14
     excludes:
       - centos-6
@@ -70,7 +71,7 @@ suites:
         enable_rhncfg: true
         rhncfg:
           actions:
-            run: true                        
+            run: true
   - name: centos7
     excludes:
       - centos-6
@@ -101,7 +102,9 @@ suites:
         reg:
           key: "1-centos6"
           server: "http://spacewalk.lan"
+          save: true
+        dont_add_repo_files: true
         enable_rhncfg: true
         rhncfg:
           actions:
-            run: true                    
+            run: true
