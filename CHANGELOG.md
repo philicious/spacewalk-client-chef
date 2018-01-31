@@ -3,6 +3,10 @@ spacewalk-client CHANGELOG
 
 This file is used to list changes made in each version of the spacewalk-client cookbook.
 
+0.2.2
+-----
+- Added more robust checks for registration (thx Martin Olsen https://github.com/snomann) 
+
 0.2.1
 -----
 - removed the prebuilt .deb client packages that slipped in
