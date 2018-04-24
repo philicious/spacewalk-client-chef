@@ -108,3 +108,23 @@ suites:
         rhncfg:
           actions:
             run: true
+  - name: custom
+    includes:
+      - centos-6
+      - centos-7
+    run_list:
+      - recipe[spacewalk-client::rhel]
+    attributes:
+      spacewalk:
+        rhel:
+          custom_repo:
+            enabled: true
+        reg:
+          key: "1-custom"
+          server: "http://spacewalk.lan"
+          save: true
+        dont_add_repo_files: true
+        enable_rhncfg: true
+        rhncfg:
+          actions:
+            run: true
