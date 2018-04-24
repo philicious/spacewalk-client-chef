@@ -25,7 +25,7 @@ Public spacewalk repository settings, used if `node['spacewalk']['rhel']['custom
 * `default['spacewalk']['rhel']['custom_repo']['enabled']` - Enables usage of custom Yum repository for Spacewalk client install. Default: **false**
 * `default['spacewalk']['rhel']['custom_repo']['base_url'] ` - Base url to be used for Custom spacewalk client repo. Default value:  `http://yum.spacewalkproject.org/2.6-client/RHEL/#{node['platform_version'][0]}/$basearch/`
 * `default['spacewalk']['rhel']['custom_repo']['gpg_check']` - Whether to run gpg check against  the binaries from custom repository. Default value is **true**
-default['spacewalk']['rhel']['custom_repo']['gpg_key'] = 'http://yum.spacewalkproject.org/RPM-GPG-KEY-spacewalk-2015'
+* `default['spacewalk']['rhel']['custom_repo']['gpg_key']` - If  gpg check is enabled, this specifies the URL to retrieve the public key from. Default value is `http://yum.spacewalkproject.org/RPM-GPG-KEY-spacewalk-2015`
 
 
 #### Registration attributes
