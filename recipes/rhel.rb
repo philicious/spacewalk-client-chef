@@ -60,14 +60,22 @@ ruby_block 'remove_repo_files' do
   end
 end
 
-remote_file "#{Chef::Config[:file_cache_path]}/spacewalk-client-repo.rpm" do
-  source "#{node['spacewalk']['rhel']['base_url']}/#{platform_major}/#{arch}/spacewalk-client-repo-#{node['spacewalk']['rhel']['repo_version']}.el#{platform_major}.noarch.rpm"
-  action :create
-end
-
-rpm_package 'spacewalk-client-repo' do
-  source "#{Chef::Config[:file_cache_path]}/spacewalk-client-repo.rpm"
-  action :install
+if node['spacewalk']['rhel']['custom_repo']['enabled']
+  yum_repository 'spacewalk-client' do
+    description 'Spacewalk Client Tools'
+    baseurl node['spacewalk']['rhel']['custom_repo']['base_url']
+    gpgcheck node['spacewalk']['rhel']['custom_repo']['gpg_check']
+    gpgkey node['spacewalk']['rhel']['custom_repo']['gpg_key']
+  end
+else
+  remote_file "#{Chef::Config[:file_cache_path]}/spacewalk-client-repo.rpm" do
+    source "#{node['spacewalk']['rhel']['base_url']}/#{platform_major}/#{arch}/spacewalk-client-repo-#{node['spacewalk']['rhel']['repo_version']}.el#{platform_major}.noarch.rpm"
+    action :create
+  end
+  rpm_package 'spacewalk-client-repo' do
+    source "#{Chef::Config[:file_cache_path]}/spacewalk-client-repo.rpm"
+    action :install
+  end
 end
 
 include_recipe 'yum-epel'
